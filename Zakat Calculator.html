@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zakat Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f4f7;
+      margin: 0;
+      padding: 30px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 20px;
+      display: block;
+      color: #333;
+      font-size: 1rem;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background-color: #fdfdfd;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus {
+      border-color: #28a745;
+      outline: none;
+      background-color: #fff;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto 0;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #146c43;
+    }
+    #result {
+      margin-top: 40px;
+      background: #e6f4ea;
+      padding: 25px;
+      border-radius: 10px;
+      color: #155724;
+      font-size: 1rem;
+      box-shadow: inset 0 0 0 1px #c3e6cb;
+    }
+    a {
+      color: #1e88e5;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="note" style="margin-bottom: 30px; background: #fffbe6; padding: 15px 20px; border-left: 5px solid #f1c40f; border-radius: 8px; font-size: 0.9rem; color: #555;">
+      <strong>Disclaimer:</strong> This calculator offers an approximate zakat amount based solely on the data you provide; it does not determine your Zakat eligibility. For a comprehensive assessment or final ruling, please consult a qualified Islamic scholar.
+    </div>
+    <h1>Zakat Calculator</h1>
+    <p style="text-align: center; font-size: 0.95rem; margin-top: -10px; margin-bottom: 30px; color: #666;">
+      by <a href="https://theblessednights.com" target="_blank" style="color: #1e88e5; font-weight: 500;">TheBlessedNights</a>
+    </p>
+
+    <label for="currency">Choose Your Currency</label>
+    <select id="currency">
+      <option value="USD">USD – US Dollar</option>
+      <option value="PKR">PKR – Pakistani Rupee</option>
+      <option value="INR">INR – Indian Rupee</option>
+      <option value="SAR">SAR – Saudi Riyal</option>
+      <option value="GBP">GBP – British Pound</option>
+      <option value="BDT">BDT – Bangladeshi Taka</option>
+      <option value="AUD">AUD – Australian Dollar</option>
+      <option value="CAD">CAD – Canadian Dollar</option>
+      <option value="AED">AED – UAE Dirham</option>
+      <option value="EUR">EUR – Euro</option>
+      <option value="IDR">IDR – Indonesian Rupiah</option>
+      <option value="MYR">MYR – Malaysian Ringgit</option>
+      <option value="CNY">CNY – Chinese Yuan</option>
+    </select>
+
+    <label for="cash">Total Cash You Own</label>
+    <div class="note">Include cash at home, in bank accounts, or digital wallets — anything accessible and in your possession. If your cash is in multiple currencies, convert all amounts into your selected currency using the <a href='https://www.google.com/search?q=currency+converter' target='_blank'>Google currency converter</a>.</div>
+    <input type="number" id="cash" placeholder="e.g. 500000">
+
+    <label for="gold">The Total Value Of Gold You Own</label>
+    <div class="note">Combine the value of all 24k, 22k, 21k, or other gold types in your possession — including jewelry, coins, bars — regardless of use. <a href="#" onclick="window.open('https://www.google.com/search?q=gold+rate+today+in+'+document.getElementById('currency').value, '_blank')">Check gold rate</a></div>
+    <input type="number" id="gold" placeholder="Enter total market value of gold">
+
+    <label for="silver">The Total Value Of Silver You Own</label>
+    <div class="note">Combine the value of all silver in your possession — including utensils, jewelry, coins — regardless of use. <a href="#" onclick="window.open('https://www.google.com/search?q=silver+rate+today+in '+document.getElementById('currency').value, '_blank')">Check silver rate</a></div>
+    <input type="number" id="silver" placeholder="Enter total market value of silver">
+
+    <label for="investments">The Total Value Of Your Investments</label>
+    <div class="note">Include shares, mutual funds, crypto, or any form of investment held for profit.</div>
+    <input type="number" id="investments" placeholder="e.g. 1000000">
+    <div class="note"><strong>Note for Corporate Investors:</strong> To refine your zakat base on shares, calculate your proportionate share of a company’s net current assets (total assets minus fixed assets and interest-bearing liabilities) per share and enter that value here instead of a raw market price.</div>
+
+    <label for="business">The Total Value Of Business Inventory or Trade Stock</label>
+    <div class="note">Include items, merchandise, or goods intended for sale or trade in your business as of your zakat date.</div>
+    <input type="number" id="business" placeholder="e.g. 200000">
+
+    <label for="property">Saved Rental Income</label>
+    <div class="note">Add only the rental income saved in your possession at the time of zakat. Do not include the property value itself.</div>
+    <input type="number" id="property" placeholder="e.g. 150000">
+
+    <label for="retirement">Accessible Retirement Savings</label>
+    <div class="note">Include any retirement funds that you can withdraw now. Exclude locked or employer-contributed amounts you cannot access.</div>
+    <input type="number" id="retirement" placeholder="e.g. 800000">
+
+    <label for="receivables">Loans You've Given (Expected to be Repaid)</label>
+    <div class="note">Only add the loans you are confident will be repaid. This includes money lent to family, friends, or business partners.</div>
+    <input type="number" id="receivables" placeholder="e.g. 100000">
+
+    <label for="debts">Short-Term Debts You Owe</label>
+    <div class="note">Debts that are due within the next 12 months. E.g. credit card dues, personal loans, or medical bills.</div>
+    <input type="number" id="debts" placeholder="e.g. 300000">
+
+    <label for="bills">Bills & Rent Already Due</label>
+    <div class="note">Include any utility bills, rent, or service charges that are already due before your zakat date.</div>
+    <input type="number" id="bills" placeholder="e.g. 50000">
+
+    <label for="businessDebts">Business Debts Due Soon</label>
+    <div class="note">Add upcoming or overdue business-related dues like vendor payments, invoices, or loan installments.</div>
+    <input type="number" id="businessDebts" placeholder="e.g. 400000">
+
+    <label for="personalLoans">Personal Loans You’ve Taken</label>
+    <div class="note">Loans borrowed from friends or family or any informal debt that must be repaid soon.</div>
+    <input type="number" id="personalLoans" placeholder="e.g. 100000">
+
+    <button onclick="calculateZakat()">Calculate Zakat</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    // Convert numbers to English words for integer part
+    function numberToWords(num) {
+      var a = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten',
+               'Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+      var b = ['', '', 'Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+      if (num < 20) return a[num];
+      if (num < 100) return b[Math.floor(num/10)] + (num % 10 ? ' ' + a[num%10] : '');
+      if (num < 1000) return a[Math.floor(num/100)] + ' Hundred' + (num % 100 ? ' ' + numberToWords(num % 100) : '');
+      if (num < 1000000) return numberToWords(Math.floor(num/1000)) + ' Thousand' + (num % 1000 ? ' ' + numberToWords(num % 1000) : '');
+      if (num < 1000000000) return numberToWords(Math.floor(num/1000000)) + ' Million' + (num % 1000000 ? ' ' + numberToWords(num % 1000000) : '');
+      return numberToWords(Math.floor(num/1000000000)) + ' Billion' + (num % 1000000000 ? ' ' + numberToWords(num % 1000000000) : '');
+    }
+    function calculateZakat() {
+      const currencyNames = {
+        USD: 'US Dollar',
+        PKR: 'Pakistani Rupee',
+        INR: 'Indian Rupee',
+        SAR: 'Saudi Riyal',
+        GBP: 'British Pound',
+        BDT: 'Bangladeshi Taka',
+        AUD: 'Australian Dollar',
+        CAD: 'Canadian Dollar',
+        AED: 'UAE Dirham',
+        EUR: 'Euro',
+        IDR: 'Indonesian Rupiah',
+        MYR: 'Malaysian Ringgit',
+        CNY: 'Chinese Yuan'
+      };
+      const get = (id) => parseFloat(document.getElementById(id)?.value) || 0;
+      const currency = document.getElementById("currency").value;
+      const totalAssets = get("cash") + get("gold") + get("silver") + get("investments") + get("business") + get("property") + get("retirement") + get("receivables");
+      const totalLiabilities = get("debts") + get("bills") + get("businessDebts") + get("personalLoans");
+      const netAssets = totalAssets - totalLiabilities;
+      let zakatDue = netAssets > 0 ? netAssets * 0.025 : 0;
+      // Round off to nearest whole number (no fractional currency)
+      const zakatDueRounded = Math.round(zakatDue);
+      document.getElementById("result").innerHTML = `
+        <h2 style='margin-top: 0;'>Your Zakat Calculation</h2>
+        <p>Zakat is calculated on the 2.5% of all your zakatable assets.</p>
+        <p>The value of your total zakatable assets according to your input: <strong>${netAssets.toFixed(2)} ${currency}</strong></p>
+        <h4 style='font-size: 1.2rem; color: #28a745; margin-top: 20px;'>Here's The Zakat Amount You Need To Pay: ${zakatDueRounded} ${currency}</h4>
+        <p><strong><em>${numberToWords(zakatDueRounded)} ${currencyNames[currency]}</em></strong></p>
+        <hr>
+        <h4 style='margin-top: 30px;'>Summary of Your Inputs:</h4>
+        <p style='font-size:0.9rem;'><strong><span style='color:#28a745;'>Green</span> = assets added; <span style='color:#c82333;'>Red</span> = liabilities deducted</strong></p>
+        <ul style='padding-left: 20px; line-height: 1.6;'>
+          <li style='color:#28a745;'><strong>Total Cash You Own:</strong> ${get("cash")} ${currency}</li>
+          <li style='color:#28a745;'><strong>The Total Value Of Gold You Own:</strong> ${get("gold")} ${currency}</li>
+          <li style='color:#28a745;'><strong>The Total Value Of Silver You Own:</strong> ${get("silver")} ${currency}</li>
+          <li style='color:#28a745;'><strong>The Total Value Of Your Investments:</strong> ${get("investments")} ${currency}</li>
+          <li style='color:#28a745;'><strong>The Total Value Of Business Inventory or Trade Stock:</strong> ${get("business")} ${currency}</li>
+          <li style='color:#28a745;'><strong>Saved Rental Income:</strong> ${get("property")} ${currency}</li>
+          <li style='color:#28a745;'><strong>Accessible Retirement Savings:</strong> ${get("retirement")} ${currency}</li>
+          <li style='color:#28a745;'><strong>Loans You've Given (Expected to be Repaid):</strong> ${get("receivables")} ${currency}</li>
+          <li style='color:#c82333;'><strong>Short-Term Debts You Owe:</strong> ${get("debts")} ${currency}</li>
+          <li style='color:#c82333;'><strong>Bills & Rent Already Due:</strong> ${get("bills")} ${currency}</li>
+          <li style='color:#c82333;'><strong>Business Debts Due Soon:</strong> ${get("businessDebts")} ${currency}</li>
+          <li style='color:#c82333;'><strong>Personal Loans You’ve Taken:</strong> ${get("personalLoans")} ${currency}</li>
+        </ul>
+        <p style='margin-top: 20px;'>To calculate your zakat, we added up all zakatable assets (green items) and subtracted liabilities (red items) to reach your net zakatable assets. This total was then multiplied by 2.5% to arrive at your zakat amount.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
